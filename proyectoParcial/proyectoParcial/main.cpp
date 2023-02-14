@@ -8,7 +8,7 @@ int main()
     // Definicion de variables
     // x, y & z son variables para almacenar los numeros ingresados, num para seleccionar el menu principal
     int numFigura, numUnidades, numMenu, contra, x, y, z;
-    float raiz, numRaiz, horas, segundos, metros, pies, millas, kilometros, area, perimetro, altura;
+    float numRaiz, horas, metros, millas, area=0, perimetro=0, altura, base=0, resultado=0;
     // Revisa que la contrasena sea la correcta
     cout << "Ingrese la contraseña correcta" << endl;
     cin >> contra;
@@ -35,13 +35,12 @@ int main()
                 cin >> y;
                 cout << "Ingresa tercer número entero" << endl;
                 cin >> z;
-                
-                if (x>y && y>z){
+                if (x>y && x>z){
                     cout << "Es el mayor de los tres"<< endl;
                     cout<< x;
                 }
                 else{
-                    if (y>x && x>z) {
+                    if (y>x && y>z) {
                         cout << "Es el mayor de los tres"<< endl;
                         cout<< y;
                     }
@@ -76,37 +75,37 @@ int main()
                     }
                 }
                 break;
-                //Evalua si el numero (x) es par o impar
-                case 3:
-                    cout << "Usted ha elegido saber si el numero es par o impar" << endl;
-                    cout << "Ingrese un número para saber si es par o impar" << endl;
-                    cin >> x;
-                    if(x % 2 == 0){
+            //Evalua si el numero (x) es par o impar
+            case 3:
+                cout << "Usted ha elegido saber si el numero es par o impar" << endl;
+                cout << "Ingrese un número para saber si es par o impar" << endl;
+                cin >> x;
+                if(x % 2 == 0){
                     cout << "el numero es par"<< endl;
                     cout<< x;
                     }
-                    else if(x % 2 != 0){
+                else if(x % 2 != 0){
                     cout << "el numero es impar"<< endl;
                     cout<< x;
                     }
-                    break;
+                break;
                 // Calcula la raiz del numero decimal introducido por usuario
                 case 4:
                     cout << "Usted ha elegido sacar la raíz de un numero" << endl;
                     cout << "Ingrese un número para sacar su raíz" << endl;
                     cin >> numRaiz;
-                    raiz=sqrt(numRaiz);
+                    resultado=sqrt(numRaiz);
                     cout << "La raíz es: " << endl;
-                    cout <<raiz;
+                    cout <<resultado;
                     break;
                 // Calcula el area y perimetro de varias figuras
                 case 5:
                     cout << "Usted ha elegido sacar el perímetro y área de figuras" << endl;
                     cout <<"Este es el menude calculo de perimetro y area, seleccione la figura a evaluar: " << endl;
-                    cout <<"1. Cuadrado";
-                    cout <<"2. Rectangulo";
-                    cout <<"3. Triangulo";
-                    cout <<"4. Circulo";
+                    cout <<"1. Cuadrado"<<endl;
+                    cout <<"2. Rectangulo"<<endl;
+                    cout <<"3. Triangulo"<<endl;
+                    cout <<"4. Circulo"<<endl;
                     cin>>numFigura;
                     switch(numFigura){
                         //Cuadrados
@@ -115,31 +114,22 @@ int main()
                             cout<<"Usted ha escogido calcular el area y perimetro de un cuadrado"<<endl;
                             cout<<"Ingrese uno de los lados de su cuadrado"<<endl;
                             cin>>lado;
-                            perimetro = lado*lado;
-                            area = lado*4;
-                            cout<<"Su perimetro es: "<<endl;
-                            cout<<perimetro;
-                            cout<<"Su area es: "<<endl;
-                            cout<<area;
+                            perimetro = lado*4;
+                            area = lado*lado;
                             break;
                         //Rectangulo
                         case 2:
-                            float base;
                             cout<<"Usted ha escogido calcular el area y perimetro de un rectangulo"<<endl;
                             cout<<"Ingrese la base del rectangulo";
                             cin>>base;
                             cout <<"ingrese la altura del rectangulo";
                             cin>>altura;
-                            perimetro = base*altura;
-                            area = 2*(base+altura);
-                            cout<<"Su perimetro es: "<<endl;
-                            cout<<perimetro;
-                            cout<<"Su area es: "<<endl;
-                            cout<<area;
+                            area = base*altura;
+                            perimetro = (2*base)+(2*altura);
                             break;
                         //Triangulo
                         case 3:
-                            float ladoUno, ladoDos, ladoTres, alturaChoice;
+                            float ladoUno, ladoDos, ladoTres;
                             cout<<"Usted ha escogido calcular el area y perimetro de un triangulo"<<endl;
                             cout <<"Ingrese el primer lado del triangulo"<<endl;
                             cin>>ladoUno;
@@ -150,11 +140,20 @@ int main()
                             cout<<"Ingrese la altura: "<<endl;
                             cin>>altura;
                             perimetro = ladoUno+ladoDos+ladoTres;
-                            area=((max(ladoUno, ladoDos, ladoTres))*altura)/2;
-                            cout<<"Su perimero es: "<<endl;
-                            cout<<perimetro;
-                            cout<<"Su area es: "<<endl;
-                            cout<<area;
+                            if(ladoUno > ladoDos & ladoUno>ladoTres){
+                                base = ladoUno;
+                            }
+                            else{
+                                if (ladoDos > ladoUno & ladoDos > ladoTres){
+                                    base=ladoDos;
+                                }
+                                else{
+                                    if (ladoTres > ladoUno & ladoTres>ladoDos){
+                                        base = ladoTres;
+                                    }
+                                }
+                            }
+                            area=(base*altura)/2;
                             break;
                         //Circulo
                         case 4:
@@ -164,11 +163,11 @@ int main()
                             cin>>radio;
                             perimetro = pi* (radio*radio);
                             area = 2*(pi*radio);
-                            cout<<"Su perimero es: "<<endl;
-                            cout<<perimetro;
-                            cout<<"Su area es: "<<endl;
-                            cout<<area;
                     }
+                    cout<<"Su perimetro es: "<<endl;
+                    cout<<perimetro<<endl;
+                    cout<<"Su area es: "<<endl;
+                    cout<<area<<endl;
                     break;
                 // Calcula distintos conversiones de unidades
                 case 6:
@@ -179,43 +178,39 @@ int main()
                     cout << "Elija 3= Millas a kilómetros" << endl;
                     cout <<"\n\n Escriba su selección y luego pulse <<ENTER>>:";
                     cin >> numUnidades;
-                switch(numUnidades){
+                    switch(numUnidades){
                     //horas a segundos
-                    case 1:
-                        cout << "Usted ha elegido convertir horas a segundos" << endl;
-                        cout << "Inserte las horas que desea convertir" << endl;
-                        cin >> horas;
-                        segundos=horas*60;
-                        cout << "Los segundos son: " << endl;
-                        cout << segundos<< '\n';
-                        break;
+                        case 1:
+                            cout << "Usted ha elegido convertir horas a segundos" << endl;
+                            cout << "Inserte las horas que desea convertir" << endl;
+                            cin >> horas;
+                            resultado=horas*60;
+                            cout << "Los segundos son: " << endl;\
+                            break;
                     //metros a pies
-                    case 2:
-                        cout << "Usted ha elegido convertir metros a pies" << endl;
-                        cout << "Inserte las metros que desea convertir" << endl;
-                        std::cin >> metros;
-                        pies=metros*3.28084;
-                        cout << "Los pies son: " << endl;
-                        cout << pies<< '\n';
-                        break;
+                        case 2:
+                            cout << "Usted ha elegido convertir metros a pies" << endl;
+                            cout << "Inserte las metros que desea convertir" << endl;
+                            std::cin >> metros;
+                            resultado=metros*3.28084;
+                            cout << "Los pies son: " << endl;
+                            break;
                     //millas a kilometros
-                    case 3:
-                        cout << "Usted ha elegido convertir millas a kilómetros" << endl;
-                        cout << "Inserte las millas que desea convertir" << endl;
-                        cin >> millas;
-                        kilometros=millas*1.60934;
-                        cout << "Los kilómetros son: " << endl;
-                        cout << kilometros<< '\n';
-                        break;
-
-                    default:
-                        cout <<"\n USTED APRETO UN CARACTER ILEGAL";
-                        break;
-                }
+                        case 3:
+                            cout << "Usted ha elegido convertir millas a kilómetros" << endl;
+                            cout << "Inserte las millas que desea convertir" << endl;
+                            cin >> millas;
+                            resultado=millas*1.60934;
+                            cout << "Los kilómetros son: " << endl;
+                            break;
+                        default:
+                            cout <<"\n USTED APRETO UN CARACTER ILEGAL";
+                            break;
+                    }
+                cout << resultado << '\n';
                 default:
                     cout <<"\n USTED APRETO UN CARACTER ILEGAL";
                     break;
-
         }
     }
     else{
